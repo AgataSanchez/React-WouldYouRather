@@ -1,9 +1,9 @@
 import {saveQuestion, saveQuestionAnswer} from '../utils/api.js'
-
+import {showLoading, hideLoading} from 'react-redux-loading'
 export const RECEIVE_QUESTIONS='RECEIVE_QUESTIONS'
 export const TOGGLE_QUESTION='TOGGLE_QUESTION'
 export const ADD_QUESTION='ADD_QUESTION'
-import {showLoading, hideLoading} from 'react-redux-loading'
+
 
 function addQuestion(question){
     return {
@@ -22,7 +22,7 @@ export function handleAddQuestion(question){
 
 }
 
-export function receiveQuestions(){
+export function receiveQuestions(questions){
     return{
         type: RECEIVE_QUESTIONS,
         questions
@@ -41,6 +41,6 @@ export function handleToggleQuestion(info){
     return (dispatch)=>{
         dispatch(toggleQuestion(info))
         return saveQuestionAnswer(info).catch((e)=>{console.warn('Error in handleAddQuestion: ', e)})
-        dispatch(toggleQuestion(info))
+        //dispatch(toggleQuestion(info))
     }
 }
