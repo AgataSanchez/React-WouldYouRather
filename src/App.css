@@ -15,20 +15,20 @@
     text-align: center;
     margin-bottom: 20px;
 }
-.link {
+.link,.logout {
     margin-left:30px;
     text-decoration: none;
 }
-.link:hover {
+.link:hover, .logout:hover {
     background-color:darkcyan;
     color: white;
     cursor: pointer;
   }
   
-.link:visited{
+.link:visited, .logout.link:visited{
     color:black;
 }
- .link.active {
+ .link.active, .logout.active {
     background-color: darkcyan;
     color: white;
   }
@@ -43,4 +43,96 @@
     font-size: 16px;
     cursor: pointer;
     width: 300px;
+    border-right-color: white;
+    border-right: 3px;
+  }
+  .topLogout{
+    display: initial;
+    border-left: beige;
+    margin-left: 150px;
+  }
+  .imgLogout{
+    display: initial;
+    margin-left: 20px;
+  }
+  .logout{
+    background-color: darkcyan; 
+    border: none;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100px;
+    margin-left: 20px;
+  }
+
+  .tablink {
+    margin-left:50px;
+    text-align:center;
+    width: fit-content;
+    margin: 0 auto;
+    
+  }
+
+  .contentQ{
+    width: 230px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .asks{
+    background-color: #E5DDDB;
+    margin: 0;
+    text-align: initial;
+  }
+  .tabcontent{
+    margin-top: 10px;
+    margin: 0;
+    text-align: initial;
+  }
+  li{
+    list-style:none;
+    border-style: groove;
+    margin-top:inherit;
+  }
+  .grid-container{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    padding: 10px;  
+
+  }
+  .item1 {
+    grid-column: 1;
+  
+  }
+  .item2{
+    text-align: initial;
+  }
+  .question{
+    display: inline;
+  }
+  .buttonPull{
+    background-color: white;
+    color: darkcyan;
+    border-style: solid;
+    border-color: darkcyan;
+  }
+  .buttonPull:hover{
+    background-color: darkcyan;
+    color: white;
+  }
+  #default{
+    background-color: white;
+    color: darkcyan;
+  }
+  .buttonAns{
+    background-color: white;
+    color: darkcyan;
+    border-style: double;
+    border-color:darkcyan;
+  }
+  .buttonAns:hover, .buttonAns::selection, .buttonAns:active{
+    background-color: white;
+    color: darkcyan;
   }
