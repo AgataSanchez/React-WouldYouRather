@@ -1,11 +1,24 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {formatQuestion} from '../utils/helpers.js'
+import {Redirect} from 'react-router-dom'
 
 class Question extends Component{
 
+    state={
+        toQuestion:false,
+        path:'',
+        vote:this.props.vote
+    }
+    viewPull = (e, question)=>{
+        const path='/question/'+question.id
+        this.setState({toQuestion:true, path:path})
+    }
     render(){
         console.log(this.props)
+        if(this.state.toQuestion){
+            return <Redirect to={{pathname:this.state.path, state:{id:this.props.question.id, vote:this.state.vote}}}/>
+        }
         return(
             <div className='question'>
                 <div>
@@ -18,7 +31,7 @@ class Question extends Component{
                     <div className='item2'>
                         <p>Would you rather</p>
                         <div className='contentQ'>{this.props.question.optionOne}</div>
-                        <button className='buttonPull'>View Pull</button>
+                        <button className='buttonPull' onClick={(e)=>this.viewPull(e,this.props.question)}>View Pull</button>
                     </div>
                 </div>
 
@@ -27,11 +40,13 @@ class Question extends Component{
     }
 }
 
-function mapStateToProps({authedUser, users, questions}, {questionId}){
+function mapStateToProps({authedUser, users, questions}, {questionId,vote}){
     const question=questions[questionId]
+    console.log(vote)
     return{
         authedUser,
         users,
+        vote,
         question:formatQuestion(question, users[question.author])
     }
 }

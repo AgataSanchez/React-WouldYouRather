@@ -12,12 +12,14 @@ function addQuestion(question){
     }
 }
 
-export function handleAddQuestion(question){
+export function handleAddQuestion(optionOneText, optionTwoText, author){
     return (dispatch)=>{
         dispatch(showLoading())
         return saveQuestion({
-            question
-        }).then(()=>dispatch(addQuestion(question))).then(()=>dispatch(hideLoading()))
+            optionOneText,
+            optionTwoText,
+            author
+        }).then((question)=>dispatch(addQuestion(question))).then(()=>dispatch(hideLoading()))
     }
 
 }
@@ -40,7 +42,10 @@ function toggleQuestion({authedUser, qid, answer}){
 export function handleToggleQuestion(info){
     return (dispatch)=>{
         dispatch(toggleQuestion(info))
-        return saveQuestionAnswer(info).catch((e)=>{console.warn('Error in handleAddQuestion: ', e)})
-        //dispatch(toggleQuestion(info))
+        return saveQuestionAnswer(info).catch((e)=>{
+            console.warn('Error in handleToggleQuestion: ', e)
+            dispatch(toggleQuestion(info))
+        })
+        
     }
 }

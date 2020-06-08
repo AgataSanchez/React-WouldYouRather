@@ -86,10 +86,13 @@
     margin: 0;
     text-align: initial;
   }
-  .tabcontent{
+  .tabcontent, .tabcontent2{
     margin-top: 10px;
     margin: 0;
     text-align: initial;
+  }
+  .tabcontent2{
+    border-style: groove;
   }
   li{
     list-style:none;
@@ -108,10 +111,16 @@
   }
   .item2{
     text-align: initial;
+    margin-left: 10px;
   }
+  .item2 >p, .question >div>p{
+    font-weight: bold;
+  }
+  
   .question{
     display: inline;
   }
+  
   .buttonPull{
     background-color: white;
     color: darkcyan;
@@ -122,10 +131,7 @@
     background-color: darkcyan;
     color: white;
   }
-  #default{
-    background-color: white;
-    color: darkcyan;
-  }
+  
   .buttonAns{
     background-color: white;
     color: darkcyan;
@@ -133,6 +139,24 @@
     border-color:darkcyan;
   }
   .buttonAns:hover, .buttonAns::selection, .buttonAns:active{
-    background-color: white;
-    color: darkcyan;
+    background-color: darkcyan;
+    color: white;
   }
+  .loadingBar{
+    background-color:darkcyan;
+  }
+  .options{
+    margin:auto
+  }
+  .btnSubmitQ{
+    width: inherit;
+    margin-top: 16px;
+  }
+ .pResults{
+   margin: auto;
+   font-weight: bold;
+ }
+ .divR{
+   border-style: groove;
+   text-align: center;
+ }

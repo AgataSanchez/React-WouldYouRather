@@ -8,6 +8,10 @@ import NewQuestion from './NewQuestion.js'
 import Nav from './Nav.js'
 import Home from './Home.js'
 import LeaderBoard from './LeaderBoard.js'
+import QuestionPage from './QuestionPage.js'
+import Question from './Question.js'
+
+//import LoadingBar from 'react-redux-loading'
 
 class App extends Component{
 
@@ -18,17 +22,18 @@ class App extends Component{
         return(
             <Router>
                 <Fragment>
+                   
                     <div>
-                    {console.log(this.props)}
-                        <Nav authedUser={this.props.loging} users={this.props.users}/>
+                        <Nav authedUser={this.props.loging} users={this.props.users}/> 
                         <div>
                             {this.props.loging===null ?                       
                             <Route path='/' exact component={Login}/>
-                            : null
+                            :  <Route path='/' exact component={Home}/>
                             }
-                            
                             <Route path='/home' exact component={Home}/>
-                            <Route path='/new' exact component={NewQuestion}/>
+                            <Route path='/new' component={NewQuestion}/>
+                            <Route path='/question' exact component={Question}/>
+                            <Route path='/question/:id' component={QuestionPage}/>
                             <Route path='/leader' exact component={LeaderBoard}/>
                              
                         </div>

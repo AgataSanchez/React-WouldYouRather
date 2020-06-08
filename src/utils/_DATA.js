@@ -131,18 +131,18 @@ let users = {
     })
   }
   
-  function formatQuestion ({ optionOneText, optionTwoText, author }) {
+  function formatQuestion (question) {
     return {
       id: generateUID(),
       timestamp: Date.now(),
-      author,
+      author: question.author,
       optionOne: {
         votes: [],
-        text: optionOneText,
+        text: question.optionOneText,
       },
       optionTwo: {
         votes: [],
-        text: optionTwoText,
+        text: question.optionTwoText,
       }
     }
   }

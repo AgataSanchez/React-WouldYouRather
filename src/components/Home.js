@@ -8,6 +8,7 @@ class Home extends Component{
         page:'Unanswered'
     }
     componentDidMount(){
+        
         let questionsU=[];
         let questionsA=[];
         
@@ -31,10 +32,12 @@ class Home extends Component{
         this.setState({page:pageName})
     }
     render(){
-        
+       
         return(
+            
             <div className='grid-content'>
                 <div className='tablink'>
+               
                 <button onClick={this.openPage} className='buttonAns' id="defaultOpen" value='Unanswered'>Unanswered Question</button>
                 <button onClick={this.openPage} className='buttonAns' value='Answered'>Answered Question</button>
                 
@@ -43,7 +46,7 @@ class Home extends Component{
                 
                     {this.state.questionsU!==undefined && (this.state.questionsU.map((qU)=>(
                         <li key={qU}>
-                            <Question questionId={qU}/>
+                            <Question questionId={qU} vote='Unanswered'/>
                         </li>)))
                     }
                     </div>
@@ -53,7 +56,7 @@ class Home extends Component{
                 
                 {this.state.questionsA!==undefined && (this.state.questionsA.map((qA)=>(
                     <li key={qA}>
-                    <Question questionId={qA}/>
+                    <Question questionId={qA} vote={this.props.users[this.props.authedUser].answers[qA]}/>
                     </li>
                     )))
                 }
