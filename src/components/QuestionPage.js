@@ -3,26 +3,29 @@ import {connect} from 'react-redux'
 import {formatQuestion} from '../utils/helpers.js'
 import { Progress } from 'semantic-ui-react'
 import {handleToggleQuestion} from '../actions/questions.js'
+import {handleSaveAnswer} from '../actions/users.js'
 
 class QuestionPage extends Component{
     state={
-        opt:''
+        opt:'',
+        vote:this.props.vote,
     }
     handleChange =(event)=>{
         const op=event.target.value;
-        console.log(op)
         this.setState({opt:op})
     }
     handleSubmit =()=>{
         const {dispatch, authedUser,id}=this.props
+      
         dispatch(handleToggleQuestion({
             authedUser,
-            qid:id,
+            id,
             answer:this.state.opt
-        }))
+        })).then((option=this.state.opt)=>dispatch(handleSaveAnswer({authedUser, answer:{id,option}})))
+        .then(()=>{this.setState({ vote:this.state.opt})})
     }
     render(){
-        console.log(this.props.vote)
+             
         return(
             <div className='container'>
             <div className='tabcontent2'>
@@ -35,13 +38,13 @@ class QuestionPage extends Component{
                         <img src={this.props.question.avatarURL} alt='' width='150' height='150'/>
                     </div>
                     <div className='item2'>
-                        {this.props.vote==='Unanswered' ? 
+                        {this.state.vote==='Unanswered' ? 
                         [
                             <p key='1'>Would You Rather..</p>,
-                            <div key={this.props.vote} className='contentQ'>
-                                <input type='radio' value='op1' onChange={this.handleChange} checked={this.state.opt==='op1'}/><label>{this.props.question.optionOne}</label>
+                            <div key={this.state.vote} className='contentQ'>
+                                <input type='radio' value='optionOne' onChange={this.handleChange} checked={this.state.opt==='optionOne'}/><label>{this.props.question.optionOne}</label>
                                 <br/>
-                                <input type='radio' value='op2' onChange={this.handleChange} checked={this.state.opt==='op2'}/><label>{this.props.question.optionTwo}</label>
+                                <input type='radio' value='optionTwo' onChange={this.handleChange} checked={this.state.opt==='optionTwo'}/><label>{this.props.question.optionTwo}</label>
                                 <br/>
                                 <button onClick={this.handleSubmit} className='btnSubmitQ'>Submit</button>
                             </div>
@@ -49,12 +52,12 @@ class QuestionPage extends Component{
                         :
                         [
                             <p className='pResults' key='2'>Results:</p>,
-                                <div key={this.props.vote} className='divR'>
+                                <div key={this.state.vote} className='divR'>
                                     <p className='pResults'>{this.props.vote==='optionOne' && ('Your vote: ')}{this.props.question.optionOne}</p>
                                     <div><Progress percent={(this.props.question.votesOne)/(this.props.question.votesOne+this.props.question.votesTwo)*100} progress /></div>
                                     <p className='pResults'>{this.props.question.votesOne} out of {this.props.question.votesOne+this.props.question.votesTwo}</p>
                                 </div>,
-                                <div key={this.props.vote + '2'} className='divR'>
+                                <div key={this.state.vote + '2'} className='divR'>
                                     <p className='pResults'>{this.props.vote==='optionTwo' && ('Your vote: ')}{this.props.question.optionTwo}</p>
                                     <div><Progress percent={(this.props.question.votesTwo)/(this.props.question.votesOne+this.props.question.votesTwo)*100} progress /></div>
                                     <p className='pResults'>{this.props.question.votesTwo} out of {this.props.question.votesOne+this.props.question.votesTwo}</p>

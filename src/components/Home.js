@@ -11,12 +11,11 @@ class Home extends Component{
         
         let questionsU=[];
         let questionsA=[];
-        
+       
         let answers=Object.keys(this.props.users[this.props.authedUser].answers)
-      
+       
         this.props.questionsId.map((q)=>{
             let question=answers.filter((a)=>q===a)
-            console.log(question)
             if(question.length>0)
                 questionsA.push(question[0]);
             else
@@ -28,7 +27,6 @@ class Home extends Component{
     }
     openPage=(event)=>{
         const pageName=event.target.value
-        console.log(pageName)
         this.setState({page:pageName})
     }
     render(){

@@ -1,5 +1,5 @@
 import {saveQuestion, saveQuestionAnswer} from '../utils/api.js'
-import {showLoading, hideLoading} from 'react-redux-loading'
+import { showLoading, hideLoading } from 'react-redux-loading'
 export const RECEIVE_QUESTIONS='RECEIVE_QUESTIONS'
 export const TOGGLE_QUESTION='TOGGLE_QUESTION'
 export const ADD_QUESTION='ADD_QUESTION'
@@ -14,12 +14,12 @@ function addQuestion(question){
 
 export function handleAddQuestion(optionOneText, optionTwoText, author){
     return (dispatch)=>{
-        dispatch(showLoading())
+       dispatch(showLoading())
         return saveQuestion({
             optionOneText,
             optionTwoText,
             author
-        }).then((question)=>dispatch(addQuestion(question))).then(()=>dispatch(hideLoading()))
+        }).then((question)=>dispatch(addQuestion(question))).then(hideLoading())
     }
 
 }
@@ -31,18 +31,22 @@ export function receiveQuestions(questions){
     }
 }
 
-function toggleQuestion({authedUser, qid, answer}){
+function toggleQuestion({authedUser, id, answer}){
     return{
         type: TOGGLE_QUESTION,
         authedUser,
-        qid,
+        id,
         answer
     }
 }
 export function handleToggleQuestion(info){
     return (dispatch)=>{
         dispatch(toggleQuestion(info))
-        return saveQuestionAnswer(info).catch((e)=>{
+        return saveQuestionAnswer({
+            authedUser: info.authedUser,
+            qid:info.id,
+            answer: info.answer
+        }).catch((e)=>{
             console.warn('Error in handleToggleQuestion: ', e)
             dispatch(toggleQuestion(info))
         })

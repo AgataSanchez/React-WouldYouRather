@@ -1,11 +1,14 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {handleAddQuestion} from '../actions/questions.js'
+import {handleSaveQuestion} from '../actions/users.js'
+import { Redirect } from 'react-router-dom'
 
 class NewQuestion extends Component{
     state={
         op1:'',
         op2:'',
+        toHome:false,
     }
     handleChange=(event)=>{
         let op=event.target.value;
@@ -21,11 +24,17 @@ class NewQuestion extends Component{
         const {dispatch, authedUser}=this.props
         
         dispatch(handleAddQuestion(op1,op2,authedUser))
-        this.setState({op1:'', op2:''})
-        /*redirect /question/id */
+        .then(({question})=>dispatch(handleSaveQuestion({authedUser,question})))
+        .then(()=>{
+            this.setState({op1:'', op2:'', toHome:true})
+        })
+        
     }
 
     render(){
+        if(this.state.toHome){
+            return <Redirect to='/home'/>
+        }
         return(
             <div className='container'>
                 <p>Create New Question</p>

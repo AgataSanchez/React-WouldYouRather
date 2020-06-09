@@ -15,23 +15,20 @@
     text-align: center;
     margin-bottom: 20px;
 }
-.link,.logout {
+.link, .logout, a {
     margin-left:30px;
     text-decoration: none;
+    
 }
-.link:hover, .logout:hover {
+.link:hover, .logout:hover,a:hover {
     background-color:darkcyan;
     color: white;
     cursor: pointer;
   }
   
-.link:visited, .logout.link:visited{
+.link:visited, .logout.link:visited, a:visited{
     color:black;
 }
- .link.active, .logout.active {
-    background-color: darkcyan;
-    color: white;
-  }
   button{
     margin-top: 20px;
     background-color: darkcyan; 

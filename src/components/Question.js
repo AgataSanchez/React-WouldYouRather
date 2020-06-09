@@ -15,7 +15,7 @@ class Question extends Component{
         this.setState({toQuestion:true, path:path})
     }
     render(){
-        console.log(this.props)
+        
         if(this.state.toQuestion){
             return <Redirect to={{pathname:this.state.path, state:{id:this.props.question.id, vote:this.state.vote}}}/>
         }
@@ -42,7 +42,6 @@ class Question extends Component{
 
 function mapStateToProps({authedUser, users, questions}, {questionId,vote}){
     const question=questions[questionId]
-    console.log(vote)
     return{
         authedUser,
         users,

@@ -18,23 +18,24 @@ class App extends Component{
     componentDidMount(){
         this.props.dispatch(handleInitialData())
     }
+    
     render(){
         return(
             <Router>
                 <Fragment>
-                   
-                    <div>
+                   <div>
                         <Nav authedUser={this.props.loging} users={this.props.users}/> 
                         <div>
                             {this.props.loging===null ?                       
                             <Route path='/' exact component={Login}/>
-                            :  <Route path='/' exact component={Home}/>
+                            :  null
                             }
+                            
                             <Route path='/home' exact component={Home}/>
                             <Route path='/new' component={NewQuestion}/>
                             <Route path='/question' exact component={Question}/>
                             <Route path='/question/:id' component={QuestionPage}/>
-                            <Route path='/leader' exact component={LeaderBoard}/>
+                            <Route path='/leader' component={LeaderBoard}/>
                              
                         </div>
                     </div>
