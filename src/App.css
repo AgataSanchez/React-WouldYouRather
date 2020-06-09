@@ -95,6 +95,7 @@
     list-style:none;
     border-style: groove;
     margin-top:inherit;
+    margin-bottom: 10px;
   }
   .grid-container{
     display: grid;
@@ -110,7 +111,7 @@
     text-align: initial;
     margin-left: 10px;
   }
-  .item2 >p, .question >div>p{
+  .item2 >p, .question >div>p, .item2U>p{
     font-weight: bold;
   }
   
@@ -156,4 +157,44 @@
  .divR{
    border-style: groove;
    text-align: center;
+ }
+ .item1U{
+  text-align: initial;
+  display: contents;
+  
+ }
+ .item2U{
+   padding: inherit;
+   border-right-style: solid;
+   border-right-width: thin;
+ }
+ .item3U{
+  margin: auto;
+  margin-left: 20px;
+ }
+ span{
+   padding: inherit;
+ }
+ .span2{
+   margin-left: 14px;
+ }
+ .score{
+    height: 100px;
+    margin-right: 10px;
+    text-align: center;
+    border-style: groove;
+    width: 70px;
+ }
+ .textScore{
+  background: #E5DDDB;
+  border-bottom-width: thin;
+  border-bottom-style: solid;
+ }
+ .pointsScore{
+  
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background: darkcyan;
+  font-size: x-large;
  }
