@@ -22,7 +22,7 @@
     margin-left:30px;
     text-decoration: none;
     border-radius: 5px;
-    
+    color:black;
 }
 .link:hover, .logout:hover, a:hover {
     background-color:darkcyan;

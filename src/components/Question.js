@@ -11,7 +11,7 @@ class Question extends Component{
         vote:this.props.vote
     }
     viewPull = (e, question)=>{
-        const path='/question/'+question.id
+        const path='/questions/'+question.id
         this.setState({toQuestion:true, path:path})
         this.props.history.push('/home')
     }

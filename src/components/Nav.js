@@ -8,8 +8,8 @@ export default function Nav(props){
     let user=undefined
     const urls=[
         {url:'/home', name: 'Home'},
-        {url: '/new', name: 'New Question'},
-        {url: '/leader', name: 'Leader Board'}
+        {url: '/add', name: 'New Question'},
+        {url: '/leaderboard', name: 'Leader Board'}
     ]
 
     if(users.length>0){
