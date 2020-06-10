@@ -13,7 +13,6 @@ class Question extends Component{
     viewPull = (e, question)=>{
         const path='/question/'+question.id
         this.setState({toQuestion:true, path:path})
-        console.log(this.props)
         this.props.history.push('/home')
     }
     render(){
@@ -44,6 +43,7 @@ class Question extends Component{
 
 function mapStateToProps({authedUser, users, questions}, {questionId,vote, history}){
     const question=questions[questionId]
+
     return{
         authedUser,
         users,

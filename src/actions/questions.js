@@ -1,5 +1,4 @@
 import {saveQuestion, saveQuestionAnswer} from '../utils/api.js'
-import { showLoading, hideLoading } from 'react-redux-loading'
 export const RECEIVE_QUESTIONS='RECEIVE_QUESTIONS'
 export const TOGGLE_QUESTION='TOGGLE_QUESTION'
 export const ADD_QUESTION='ADD_QUESTION'
@@ -14,12 +13,11 @@ function addQuestion(question){
 
 export function handleAddQuestion(optionOneText, optionTwoText, author){
     return (dispatch)=>{
-       dispatch(showLoading())
         return saveQuestion({
             optionOneText,
             optionTwoText,
             author
-        }).then((question)=>dispatch(addQuestion(question))).then(hideLoading())
+        }).then((question)=>dispatch(addQuestion(question)))
     }
 
 }

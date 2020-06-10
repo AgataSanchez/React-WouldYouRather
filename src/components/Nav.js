@@ -1,11 +1,16 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import {setAuthedUser} from '../actions/authedUser.js'
+import LoadingBar from 'react-redux-loading'
 
 export default function Nav(props){
     const {authedUser,users,dispatch}=props
     let user=undefined
-   
+    const urls=[
+        {url:'/home', name: 'Home'},
+        {url: '/new', name: 'New Question'},
+        {url: '/leader', name: 'Leader Board'}
+    ]
 
     if(users.length>0){
         user= users.filter((u)=>u.id===authedUser)
@@ -21,24 +26,16 @@ export default function Nav(props){
         return dispatch(setAuthedUser(null));
     }
     return(
-        
+               
         <nav className='topnavBar'>
             <div className='divnavBar'>
-            <NavLink to={authedUser!==null ? '/home' : '/'}
-             isActive={(match, location)=>isLogin('/home', match,location)} 
-             activeStyle={{ backgroundColor: 'darkcyan', color: 'white'}} 
-             activeClassName='link'> Home </NavLink>
-
-            <NavLink to={authedUser!==null ? '/new' : '/'} 
-            isActive={(match, location)=>isLogin('/new', match, location)} 
-            activeStyle={{ backgroundColor: 'darkcyan', color: 'white'}} 
-            activeClassName='link'> New Question </NavLink>
-
-            <NavLink to={authedUser!==null ? '/leader' : '/'} 
-            isActive={(match, location)=>isLogin('/leader', match, location)}
-            activeStyle={{ backgroundColor: 'darkcyan', color: 'white'}} 
-            activeClassName='link'> Leader Board </NavLink>
-            
+            {urls.map((u, index)=>(
+                <NavLink key={'nav'+ index} to={authedUser!==null ? u.url : '/'}
+                isActive={(match, location)=>isLogin(u.url, match,location)} 
+                activeStyle={{ backgroundColor: 'darkcyan', color: 'white'}} 
+                activeClassName='link'> {u.name} </NavLink>
+            ))
+            }
             {authedUser!==null && user.length>0 ?(
             <div className='topLogout'> 
                 Hello, {user[0].name}
@@ -47,7 +44,10 @@ export default function Nav(props){
             </div>
             ): null
             }
+           
             </div>
-        </nav>
+            <LoadingBar style={{ backgroundColor: 'darkcyan', height: '5px'}}/>
+        </nav> 
+        
     )
 }

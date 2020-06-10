@@ -26,9 +26,31 @@ class QuestionPage extends Component{
         
     }
     render(){
+      //Consts to use in divs
         const vOne=this.props.question.votesOne
-        const vTwo=this.props.question.votesTwo
+        const vTwo=this.props.question.votesTwo 
+        const vOptions=[vOne,vTwo]
         const sumVotes=vOne+vTwo
+        const options=['optionOne', 'optionTwo']
+        const optionsText=[this.props.question.optionOne, this.props.question.optionTwo]
+        
+        //Create the diferents divs
+        let divs=[]
+       
+        for(let i=0; i < 2; ++i){
+            console.log(this.state.vote)
+            console.log(options)
+            divs.push(
+            <div key={i} className='divR'>
+                <div className='imgR'>{this.state.vote===options[i] && 
+                    (<div><img src="https://img.icons8.com/flat_round/64/000000/vote-badge.png" alt='' width='30'/></div>)}
+                    <p className='pResults'>{optionsText[i]}</p>
+                </div>
+                <div key='progress1'><ProgressBar completed={ ((vOptions[i]/sumVotes)*100).toFixed(2)} label={(vOptions[i]/sumVotes)*100} /></div>
+                <p className='pResults'>{vOptions[i]} out of {sumVotes}</p>
+            </div>)
+        }
+
         return(
             <div className='container'>
             <div className='tabcontent2'>
@@ -54,18 +76,8 @@ class QuestionPage extends Component{
                         ]
                         :
                         [
-                            
                             <p className='pResults' key='2'>Results:</p>,
-                                <div key={this.state.vote} className='divR'>
-                                    <div className='imgR'>{this.state.vote==='optionOne' && (<div><img src="https://img.icons8.com/flat_round/64/000000/vote-badge.png" alt='' width='30'/></div>)}<p className='pResults'>{this.props.question.optionOne}</p></div>
-                                    <div key='progress1'><ProgressBar completed={ ((vOne/sumVotes)*100).toFixed(2)} label={(vOne/sumVotes)*100} /></div>
-                                    <p className='pResults'>{vOne} out of {sumVotes}</p>
-                                </div>,
-                                <div key={this.state.vote + '2'} className='divR'>
-                                  <div className='imgR'>{this.state.vote==='optionTwo' && (<div><img src="https://img.icons8.com/flat_round/64/000000/vote-badge.png" alt='' width='30'/></div>)}<p className='pResults'>{this.props.question.optionTwo}</p></div>
-                                    <div key='progress2'><ProgressBar completed={((vTwo/sumVotes)*100).toFixed(2)} label={(vTwo/sumVotes)*100}/></div>
-                                    <p className='pResults'>{vTwo} out of {sumVotes}</p>
-                                </div>
+                                divs                                
                         ]   
                         }
                     </div>

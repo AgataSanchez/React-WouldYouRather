@@ -3,66 +3,56 @@ import {connect} from 'react-redux'
 import Question from './Question.js'
 class Home extends Component{
     state={
+        questions:[],
         questionsU:[],
         questionsA:[],
         page:'Unanswered',
     }
-    componentDidMount(){
-        
-        let questionsU=[];
-        let questionsA=[];
-       
+    getQuestions(page){
+
+        let questions=[];
         let answers=Object.keys(this.props.users[this.props.authedUser].answers)
        
         this.props.questionsId.map((q)=>{
             let question=answers.filter((a)=>q===a)
-            if(question.length>0)
-                questionsA.push(question[0]);
-            else
-                questionsU.push(q);
+            if(page==='Unanswered'){
+                if(question.length===0)
+                    questions.push(q);
+            }else if(page==='Answered'){
+                if(question.length>0)
+                    questions.push(question[0])
+            }
+           return questions
         });
         
-        this.setState({questionsU:questionsU, questionsA:questionsA})
-       
+        this.setState({questions:questions})
+    }
+    componentDidMount(){
+        this.getQuestions(this.state.page)
     }
     openPage=(event)=>{
         const pageName=event.target.value
         this.setState({page:pageName})
+        this.getQuestions(pageName)
     }
     render(){
+        
         return(
             
             <div className='grid-content'>
                 <div className='tablink'>
                
-                <button onClick={this.openPage} className={this.state.page==='Unanswered' ? 'active' : 'buttonAns'} value='Unanswered'>Unanswered Question</button>
-                <button onClick={this.openPage} className={this.state.page==='Answered' ? 'active' : 'buttonAns'} value='Answered'>Answered Question</button>
-                
-                {this.state.page==='Unanswered' ? (
-                    <div id="Unanswered" className="tabcontent">
-                
-                    {this.state.questionsU!==undefined && (this.state.questionsU.map((qU)=>(
-                        <li key={qU}>
-                            <Question questionId={qU} vote='Unanswered' history={this.props.history}/>
-                        </li>)))
-                    }
+                    <button onClick={this.openPage} className={this.state.page==='Unanswered' ? 'active' : 'buttonAns'} value='Unanswered'>Unanswered Question</button>
+                    <button onClick={this.openPage} className={this.state.page==='Answered' ? 'active' : 'buttonAns'} value='Answered'>Answered Question</button>
+                    <div id={this.state.page} className="tabcontent">
+                        {this.state.questions!==undefined && (this.state.questions.map((q)=>(
+                            <li key={q}>
+                                <Question questionId={q} vote={this.state.page==='Unanswered' ? 'Unanswered' : this.props.users[this.props.authedUser].answers[q]} history={this.props.history}/>
+                            </li>
+                            )))
+                        }
                     </div>
-                ):
-                (
-                <div id="Answered" className="tabcontent">
-                
-                {this.state.questionsA!==undefined && (this.state.questionsA.map((qA)=>(
-                    <li key={qA}>
-                    <Question questionId={qA} vote={this.props.users[this.props.authedUser].answers[qA]} history={this.props.history}/>
-                    </li>
-                    )))
-                }
                 </div>
-                )
-                }
-                </div>
-
-                
             </div>
         )
     }

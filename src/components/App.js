@@ -11,8 +11,6 @@ import LeaderBoard from './LeaderBoard.js'
 import QuestionPage from './QuestionPage.js'
 import Question from './Question.js'
 
-//import LoadingBar from 'react-redux-loading'
-
 class App extends Component{
 
     componentDidMount(){
