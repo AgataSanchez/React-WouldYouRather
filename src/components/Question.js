@@ -13,6 +13,8 @@ class Question extends Component{
     viewPull = (e, question)=>{
         const path='/question/'+question.id
         this.setState({toQuestion:true, path:path})
+        console.log(this.props)
+        this.props.history.push('/home')
     }
     render(){
         
@@ -21,7 +23,7 @@ class Question extends Component{
         }
         return(
             <div className='question'>
-                <div>
+                <div className='pQuestion'>
                     <p className='asks'>{this.props.question.name} asks:</p>
                 </div>
                 <div className='grid-container'>
@@ -40,12 +42,13 @@ class Question extends Component{
     }
 }
 
-function mapStateToProps({authedUser, users, questions}, {questionId,vote}){
+function mapStateToProps({authedUser, users, questions}, {questionId,vote, history}){
     const question=questions[questionId]
     return{
         authedUser,
         users,
         vote,
+        history,
         question:formatQuestion(question, users[question.author])
     }
 }

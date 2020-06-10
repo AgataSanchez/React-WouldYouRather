@@ -1,9 +1,9 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-
+import {setAuthedUser} from '../actions/authedUser.js'
 
 export default function Nav(props){
-    const {authedUser,users}=props
+    const {authedUser,users,dispatch}=props
     let user=undefined
    
 
@@ -17,9 +17,13 @@ export default function Nav(props){
         }
         return location.pathname===page && authedUser!==null ;
     }
+    function handleLogout(){
+        return dispatch(setAuthedUser(null));
+    }
     return(
         
         <nav className='topnavBar'>
+            <div className='divnavBar'>
             <NavLink to={authedUser!==null ? '/home' : '/'}
              isActive={(match, location)=>isLogin('/home', match,location)} 
              activeStyle={{ backgroundColor: 'darkcyan', color: 'white'}} 
@@ -39,10 +43,11 @@ export default function Nav(props){
             <div className='topLogout'> 
                 Hello, {user[0].name}
                 <div className='imgLogout'><img src={user[0].avatarURL} alt='' width="30" height="30"/></div>
-                <NavLink to='/' exact activeClassName='link'>Logout</NavLink>
+                <NavLink to='/' exact activeClassName='link' onClick={handleLogout}>Logout</NavLink>
             </div>
             ): null
             }
+            </div>
         </nav>
     )
 }

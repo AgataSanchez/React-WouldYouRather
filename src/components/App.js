@@ -24,7 +24,7 @@ class App extends Component{
             <Router>
                 <Fragment>
                    <div>
-                        <Nav authedUser={this.props.loging} users={this.props.users}/> 
+                        <Nav authedUser={this.props.loging} users={this.props.users} dispatch={this.props.dispatch}/> 
                         <div>
                             {this.props.loging===null ?                       
                             <Route path='/' exact component={Login}/>

@@ -11,23 +11,28 @@
     cursor: pointer;
 }
 .topnavBar{
-    margin-top:30px;
-    text-align: center;
-    margin-bottom: 20px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  text-align: center;
+  border-bottom-style: solid;
+  border-bottom-color: darkcyan;
+  border-bottom-width: 2px;
 }
 .link, .logout, a {
     margin-left:30px;
     text-decoration: none;
+    border-radius: 5px;
     
 }
-.link:hover, .logout:hover,a:hover {
+.link:hover, .logout:hover, a:hover {
     background-color:darkcyan;
     color: white;
+    border-radius: 5px;
     cursor: pointer;
   }
   
 .link:visited, .logout.link:visited, a:visited{
-    color:black;
+  color:black
 }
   button{
     margin-top: 20px;
@@ -69,7 +74,7 @@
     text-align:center;
     width: fit-content;
     margin: 0 auto;
-    
+    margin-top:-20px;
   }
 
   .contentQ{
@@ -79,7 +84,7 @@
     overflow: hidden;
   }
   .asks{
-    background-color: #E5DDDB;
+    background-color: #67c7b6;
     margin: 0;
     text-align: initial;
   }
@@ -90,6 +95,7 @@
   }
   .tabcontent2{
     border-style: groove;
+    width: 500px;
   }
   li{
     list-style:none;
@@ -105,7 +111,7 @@
   }
   .item1 {
     grid-column: 1;
-  
+    margin:auto;
   }
   .item2{
     text-align: initial;
@@ -136,6 +142,12 @@
     border-style: double;
     border-color:darkcyan;
   }
+  .active{
+    border-style: groove;
+    border-color: darkcyan;
+    background-color: #67c7b6;
+    color: black;
+  }
   .buttonAns:hover, .buttonAns::selection, .buttonAns:active{
     background-color: darkcyan;
     color: white;
@@ -143,20 +155,25 @@
   .loadingBar{
     background-color:darkcyan;
   }
-  .options{
+  .options {
     margin:auto
   }
   .btnSubmitQ{
-    width: inherit;
     margin-top: 16px;
   }
  .pResults{
    margin: auto;
    font-weight: bold;
+   height: 30px;
  }
  .divR{
    border-style: groove;
    text-align: center;
+   width: 310px;
+   margin-bottom: 10px;
+ }
+ .imgR{
+   display: flex;
  }
  .item1U{
   text-align: initial;
@@ -167,6 +184,9 @@
    padding: inherit;
    border-right-style: solid;
    border-right-width: thin;
+ }
+ .item2U>p{
+  background-color: #67c7b6;
  }
  .item3U{
   margin: auto;
@@ -191,10 +211,34 @@
   border-bottom-style: solid;
  }
  .pointsScore{
-  
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
-  background: darkcyan;
+  background: #67c7b6;
   font-size: x-large;
+ }
+ .divnavBar{
+   margin:inherit;
+ }
+ .pQuestion{
+  background-color: #67c7b6;
+  height: 25px;
+  border-bottom: solid;
+  border-bottom-width: 1px;
+ }
+ .divNQ{
+  border-style: groove;
+  height: 320px;
+  width: 385px;
+ }
+ #op1, #op2{
+   width:360px;
+   border-radius: 25px;
+ }
+ .pNQ{
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  background-color: #67c7b6;
+  display: grid;
+  font-weight: bolder;
  }

@@ -36,16 +36,25 @@ class NewQuestion extends Component{
             return <Redirect to='/home'/>
         }
         return(
+            
             <div className='container'>
-                <p>Create New Question</p>
-                <hr/>
-                <p>Complete the question:</p>
-                <p>Would you rather ...</p>
-                <input type='text' placeholder='Enter Option One Text Here' id='op1' onChange={this.handleChange}></input>
-                <p>OR</p>
-                <input type='text' placeholder='Enter Option Two Text Here' id='op2'  onChange={this.handleChange}></input>
-                <br/>
-                <button disabled={this.state.op1==='' || this.state.op2===''} onClick={this.handleSubmit}>Submit</button>
+                <div className='divNQ'>
+                <div className='pNQ'>
+                    <p>Create New Question</p>
+                    
+                </div>
+                <div>
+                    <p>Complete the question:</p>
+                    <p>Would you rather ...</p>
+                </div>
+                <div>
+                    <input type='text' placeholder='Enter Option One Text Here' id='op1' onChange={this.handleChange}></input>
+                    <p>OR</p>
+                    <input type='text' placeholder='Enter Option Two Text Here' id='op2'  onChange={this.handleChange}></input>
+                    <br/>
+                    <button disabled={this.state.op1==='' || this.state.op2===''} onClick={this.handleSubmit}>Submit</button>
+                </div>
+            </div>
             </div>
         )
     }

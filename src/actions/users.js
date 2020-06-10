@@ -32,7 +32,6 @@ function saveAnswer({authedUser, answer}){
 }
 
 export function handleSaveAnswer(info){
-    console.log(info)
     return (dispatch)=>{
         dispatch(saveAnswer(info))
     }

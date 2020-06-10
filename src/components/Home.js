@@ -5,7 +5,7 @@ class Home extends Component{
     state={
         questionsU:[],
         questionsA:[],
-        page:'Unanswered'
+        page:'Unanswered',
     }
     componentDidMount(){
         
@@ -30,21 +30,20 @@ class Home extends Component{
         this.setState({page:pageName})
     }
     render(){
-       
         return(
             
             <div className='grid-content'>
                 <div className='tablink'>
                
-                <button onClick={this.openPage} className='buttonAns' id="defaultOpen" value='Unanswered'>Unanswered Question</button>
-                <button onClick={this.openPage} className='buttonAns' value='Answered'>Answered Question</button>
+                <button onClick={this.openPage} className={this.state.page==='Unanswered' ? 'active' : 'buttonAns'} value='Unanswered'>Unanswered Question</button>
+                <button onClick={this.openPage} className={this.state.page==='Answered' ? 'active' : 'buttonAns'} value='Answered'>Answered Question</button>
                 
                 {this.state.page==='Unanswered' ? (
                     <div id="Unanswered" className="tabcontent">
                 
                     {this.state.questionsU!==undefined && (this.state.questionsU.map((qU)=>(
                         <li key={qU}>
-                            <Question questionId={qU} vote='Unanswered'/>
+                            <Question questionId={qU} vote='Unanswered' history={this.props.history}/>
                         </li>)))
                     }
                     </div>
@@ -54,7 +53,7 @@ class Home extends Component{
                 
                 {this.state.questionsA!==undefined && (this.state.questionsA.map((qA)=>(
                     <li key={qA}>
-                    <Question questionId={qA} vote={this.props.users[this.props.authedUser].answers[qA]}/>
+                    <Question questionId={qA} vote={this.props.users[this.props.authedUser].answers[qA]} history={this.props.history}/>
                     </li>
                     )))
                 }
