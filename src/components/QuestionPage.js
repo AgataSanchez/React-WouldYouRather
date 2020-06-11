@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {formatQuestion} from '../utils/helpers.js'
 import {handleToggleQuestion} from '../actions/questions.js'
-import {handleSaveAnswer} from '../actions/users.js'
 import ProgressBar from './ProgressBar.js'
 import Page404 from './Page404.js'
 
@@ -22,13 +21,14 @@ class QuestionPage extends Component{
             authedUser,
             id,
             answer:this.state.opt
-        })).then((option=this.state.opt)=>dispatch(handleSaveAnswer({authedUser, answer:{id,option}})))
+        }))
         .then(()=>{this.setState({ vote:this.state.opt})})
         
     }
     render(){
         if(this.props.error)
             return (<Page404 question={true}/>)
+        
       //Consts to use in divs
         const vOne=this.props.question.votesOne
         const vTwo=this.props.question.votesTwo 
@@ -41,11 +41,11 @@ class QuestionPage extends Component{
         let divs=[]
        
         for(let i=0; i < 2; ++i){
-           
             divs.push(
             <div key={i} className='divR'>
-                <div className='imgR'>{this.state.vote===options[i] && 
-                    (<div><img src="https://img.icons8.com/flat_round/64/000000/vote-badge.png" alt='' width='30'/></div>)}
+                <div className='imgR' key={`divImgR${i}`}>
+                    {this.state.vote===options[i] && 
+                    (<div key='imgVote'><img src="https://img.icons8.com/flat_round/64/000000/vote-badge.png" alt='' width='30'/></div>)}
                     <p className='pResults'>{optionsText[i]}</p>
                 </div>
                 <div key='progress1'><ProgressBar completed={ ((vOptions[i]/sumVotes)*100).toFixed(2)} label={(vOptions[i]/sumVotes)*100} /></div>
@@ -53,6 +53,7 @@ class QuestionPage extends Component{
             </div>)
         }
 
+       
         return(
             <div className='container'>
             <div className='tabcontent2'>
@@ -73,7 +74,7 @@ class QuestionPage extends Component{
                                 <br/>
                                 <label><input type='radio' value='optionTwo' onChange={this.handleChange} checked={this.state.opt==='optionTwo'}/>{this.props.question.optionTwo}</label>
                                 <br/>
-                                <button onClick={this.handleSubmit} className='btnSubmitQ'>Submit</button>
+                                <button disabled={this.state.opt===''}onClick={this.handleSubmit} className='btnSubmitQ'>Submit</button>
                             </div>
                         ]
                         :
@@ -91,19 +92,21 @@ class QuestionPage extends Component{
     }
 }
 function mapStateToProps({authedUser, questions, users},props){
-    let id,vote
+    let id
    
     if(props.location.state===undefined ){ 
         let idPath=props.location.pathname.split('/')
         id=idPath[2]
     }else{
         id=props.location.state.id
-        vote=props.location.state.vote
     }
 
     const question=questions[id]
+    
     if(question===undefined)
-        return {error:true} 
+        return {error:true}
+    
+    const vote=question.optionOne.votes.includes(authedUser) ? 'optionOne' : question.optionTwo.votes.includes(authedUser) ? 'optionTwo' :'Unanswered'    
     return{
         id,
         vote,

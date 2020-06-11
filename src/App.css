@@ -125,13 +125,13 @@
     display: inline;
   }
   
-  .buttonPull{
+  .buttonPoll{
     background-color: white;
     color: darkcyan;
     border-style: solid;
     border-color: darkcyan;
   }
-  .buttonPull:hover{
+  .buttonPoll:hover{
     background-color: darkcyan;
     color: white;
   }

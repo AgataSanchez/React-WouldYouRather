@@ -1,4 +1,5 @@
-import {RECEIVE_USERS, SAVE_QUESTION, SAVE_ANSWER} from '../actions/users.js'
+import {RECEIVE_USERS/*, SAVE_QUESTION, SAVE_ANSWER*/} from '../actions/users.js'
+import {ADD_QUESTION, TOGGLE_QUESTION} from '../actions/questions.js'
 
 export default function users(state={}, action){
     switch(action.type){
@@ -7,22 +8,22 @@ export default function users(state={}, action){
                 ...state,
                 ...action.users,
             }
-        case SAVE_QUESTION:
+        case ADD_QUESTION:
             return{
                 ...state,
-                [action.id]:{
-                    ...state[action.id],
-                    questions: state[action.id].questions.concat([action.questionId])
+                [action.question.author]:{
+                    ...state[action.question.author],
+                    questions: state[action.question.author].questions.concat([action.question.id])
                 }
             }
-        case SAVE_ANSWER:
+        case TOGGLE_QUESTION:
             return{
                 ...state,
-                [action.id]:{
-                    ...state[action.id],
+                [action.authedUser]:{
+                    ...state[action.authedUser],
                     answers:{ 
-                        ...state[action.id].answers,
-                        [action.answer.id]:action.answer.option
+                        ...state[action.authedUser].answers,
+                        [action.id]:action.answer.answer
                     }
                 }
             }

@@ -4,15 +4,13 @@ import Question from './Question.js'
 class Home extends Component{
     state={
         questions:[],
-        questionsU:[],
-        questionsA:[],
         page:'Unanswered',
     }
     getQuestions(page){
 
         let questions=[];
         let answers=Object.keys(this.props.users[this.props.authedUser].answers)
-       
+      
         this.props.questionsId.map((q)=>{
             let question=answers.filter((a)=>q===a)
             if(page==='Unanswered'){

@@ -8,9 +8,8 @@ class Question extends Component{
     state={
         toQuestion:false,
         path:'',
-        vote:this.props.vote
     }
-    viewPull = (e, question)=>{
+    viewPoll = (e, question)=>{
         const path='/questions/'+question.id
         this.setState({toQuestion:true, path:path})
         this.props.history.push('/')
@@ -18,7 +17,7 @@ class Question extends Component{
     render(){
         
         if(this.state.toQuestion){
-            return <Redirect to={{pathname:this.state.path, state:{id:this.props.question.id, vote:this.state.vote}}}/>
+            return <Redirect to={{pathname:this.state.path, state:{id:this.props.question.id}}}/>
         }
         return(
             <div className='question'>
@@ -32,7 +31,7 @@ class Question extends Component{
                     <div className='item2'>
                         <p>Would you rather</p>
                         <div className='contentQ'>{this.props.question.optionOne}</div>
-                        <button className='buttonPull' onClick={(e)=>this.viewPull(e,this.props.question)}>View Pull</button>
+                        <button className='buttonPoll' onClick={(e)=>this.viewPoll(e,this.props.question)}>View Poll</button>
                     </div>
                 </div>
 
@@ -41,13 +40,12 @@ class Question extends Component{
     }
 }
 
-function mapStateToProps({authedUser, users, questions}, {questionId,vote, history}){
+function mapStateToProps({authedUser, users, questions}, {questionId, history}){
     const question=questions[questionId]
 
     return{
         authedUser,
         users,
-        vote,
         history,
         question:formatQuestion(question, users[question.author])
     }

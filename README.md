@@ -4,8 +4,8 @@ The objective of this application is the creation, display and voting of questio
 
 ## TL;DR
 To get started developing right away:
-   * install all project dependencies with npm install
-   * start the development server with npm start
+   * install all project dependencies with `npm install`
+   * start the development server with `npm start`
 ## What You're Getting
 ```bash
 ├── README.md - This file.
@@ -45,9 +45,9 @@ To get started developing right away:
     |   ├── questions.js # Reducers to switch the action.type of questions
     |   └── users.js # Reducers to switch the action.type of users
     ├── utils
-    |   ├── _DATA.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
-    │   ├── api.js # Functions to call the _DATA functions
-    |   └── helpers.js #  Call the api's functions
+        ├── _DATA.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
+        ├── api.js # Functions to call the _DATA functions
+        └── helpers.js #  Call the api's functions
 ```
 ## Backend Server
 To simplify your development process, we've provided a backend server for you to develop against. The provided file [`_DATA.js`](src/utils/_DATA.js) contains the methods you will need to perform necessary operations on the backend:
@@ -61,7 +61,7 @@ To simplify your development process, we've provided a backend server for you to
     
 Method Signature:
 ```js
-    _getQuestions
+    _getQuestions()
 ```
 Returns a Promise which resolves to a JSON object containing a collection of questions objects.
 This collection represents the questions currently in the dashboard in your app.
@@ -70,7 +70,7 @@ This collection represents the questions currently in the dashboard in your app.
 
 Method Signature:
 ```js
-    _getUsers
+    _getUsers()
 ```
 Returns a Promise which resolves to a JSON object containing a collection of users objects.
 This collection represents the users currently in the backend in your app.

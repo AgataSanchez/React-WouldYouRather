@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {handleAddQuestion} from '../actions/questions.js'
-import {handleSaveQuestion} from '../actions/users.js'
 import { Redirect } from 'react-router-dom'
 
 class NewQuestion extends Component{
@@ -24,7 +23,6 @@ class NewQuestion extends Component{
         const {dispatch, authedUser}=this.props
         
         dispatch(handleAddQuestion(op1,op2,authedUser))
-        .then(({question})=>dispatch(handleSaveQuestion({authedUser,question})))
         .then(()=>{
             this.setState({op1:'', op2:'', toHome:true})
         })
@@ -52,7 +50,8 @@ class NewQuestion extends Component{
                     <p>OR</p>
                     <input type='text' placeholder='Enter Option Two Text Here' id='op2'  onChange={this.handleChange}></input>
                     <br/>
-                    <button disabled={this.state.op1==='' || this.state.op2===''} onClick={this.handleSubmit}>Submit</button>
+                    <button disabled={this.state.op1==='' || this.state.op2==='' || (this.state.op1===this.state.op2)}
+                     onClick={this.handleSubmit}>Submit</button>
                 </div>
             </div>
             </div>
