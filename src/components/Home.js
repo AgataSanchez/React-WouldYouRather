@@ -61,7 +61,7 @@ class Home extends Component{
 function mapStateToProps({authedUser,users, questions}){
     return{authedUser,
         users: users,
-        questionsId: Object.keys(questions)
+        questionsId: Object.keys(questions).sort((a,b)=> questions[b].timestamp - questions[a].timestamp)
     }
 }
 export default connect(mapStateToProps)(Home)

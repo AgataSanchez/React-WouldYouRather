@@ -33,7 +33,7 @@ class NewQuestion extends Component{
 
     render(){
         if(this.state.toHome){
-            return <Redirect to='/home'/>
+            return <Redirect to='/'/>
         }
         return(
             

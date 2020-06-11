@@ -4,6 +4,7 @@ import {formatQuestion} from '../utils/helpers.js'
 import {handleToggleQuestion} from '../actions/questions.js'
 import {handleSaveAnswer} from '../actions/users.js'
 import ProgressBar from './ProgressBar.js'
+import Page404 from './Page404.js'
 
 class QuestionPage extends Component{
     state={
@@ -26,6 +27,8 @@ class QuestionPage extends Component{
         
     }
     render(){
+        if(this.props.error)
+            return (<Page404 question={true}/>)
       //Consts to use in divs
         const vOne=this.props.question.votesOne
         const vTwo=this.props.question.votesTwo 
@@ -38,8 +41,7 @@ class QuestionPage extends Component{
         let divs=[]
        
         for(let i=0; i < 2; ++i){
-            console.log(this.state.vote)
-            console.log(options)
+           
             divs.push(
             <div key={i} className='divR'>
                 <div className='imgR'>{this.state.vote===options[i] && 
@@ -89,8 +91,19 @@ class QuestionPage extends Component{
     }
 }
 function mapStateToProps({authedUser, questions, users},props){
-    const {id, vote}=props.location.state
+    let id,vote
+   
+    if(props.location.state===undefined ){ 
+        let idPath=props.location.pathname.split('/')
+        id=idPath[2]
+    }else{
+        id=props.location.state.id
+        vote=props.location.state.vote
+    }
+
     const question=questions[id]
+    if(question===undefined)
+        return {error:true} 
     return{
         id,
         vote,

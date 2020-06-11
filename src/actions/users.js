@@ -1,3 +1,4 @@
+import { hideLoading } from 'react-redux-loading'
 export const RECEIVE_USERS='RECEIVE_USERS'
 export const SAVE_QUESTION='SAVE_QUESTION'
 export const SAVE_ANSWER='SAVE_ANSWER'
@@ -21,6 +22,7 @@ function saveQuestion({authedUser, question}){
 export function handleSaveQuestion(info){
     return(dispatch)=>{ 
         dispatch(saveQuestion(info))
+        dispatch(hideLoading())
     }
 }
 
@@ -35,5 +37,6 @@ function saveAnswer({authedUser, answer}){
 export function handleSaveAnswer(info){
     return (dispatch)=>{
         dispatch(saveAnswer(info))
+        dispatch(hideLoading())
     }
 }

@@ -13,7 +13,7 @@ class Question extends Component{
     viewPull = (e, question)=>{
         const path='/questions/'+question.id
         this.setState({toQuestion:true, path:path})
-        this.props.history.push('/home')
+        this.props.history.push('/')
     }
     render(){
         

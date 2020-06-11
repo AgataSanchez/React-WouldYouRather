@@ -7,7 +7,7 @@ export default function Nav(props){
     const {authedUser,users,dispatch}=props
     let user=undefined
     const urls=[
-        {url:'/home', name: 'Home'},
+        {url:'/', name: 'Home'},
         {url: '/add', name: 'New Question'},
         {url: '/leaderboard', name: 'Leader Board'}
     ]
@@ -30,7 +30,7 @@ export default function Nav(props){
         <nav className='topnavBar'>
             <div className='divnavBar'>
             {urls.map((u, index)=>(
-                <NavLink key={'nav'+ index} to={authedUser!==null ? u.url : '/'}
+                <NavLink key={'nav'+ index} to={authedUser!==null ? u.url : '/login'}
                 isActive={(match, location)=>isLogin(u.url, match,location)} 
                 activeStyle={{ backgroundColor: 'darkcyan', color: 'white'}} 
                 activeClassName='link'> {u.name} </NavLink>
@@ -40,7 +40,7 @@ export default function Nav(props){
             <div className='topLogout'> 
                 Hello, {user[0].name}
                 <div className='imgLogout'><img src={user[0].avatarURL} alt='' width="30" height="30"/></div>
-                <NavLink to='/' exact activeClassName='link' onClick={handleLogout}>Logout</NavLink>
+                <NavLink to='/login' exact activeClassName='link' onClick={handleLogout}>Logout</NavLink>
             </div>
             ): null
             }

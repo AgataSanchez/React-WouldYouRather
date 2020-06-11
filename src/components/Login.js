@@ -26,9 +26,12 @@ class Login extends Component{
     handleSubmit=()=>{
      
         if(this.state.user !==null){ 
+            const from= this.props.location===undefined || this.props.location.state===null
+             ? '/'
+             : this.props.location.state.from.pathname
             this.props.dispatch(handleLogin(this.state.user.value)) 
             this.setState({error:false, submited:true})
-            this.props.history.push('/home')
+            this.props.history.push(`${from}`)
                  
         }else
             this.setState({user:null, error:true, submited:false})
@@ -40,7 +43,7 @@ class Login extends Component{
             label: <div className='usersSign'><img src={u.avatarURL} alt=''width="20" height="20"/> {u.name}</div>}
         ))
         if(this.state.submited){
-            return <Redirect to='/home'/>
+            return <Redirect to='/'/>
         }
         return(
             <div className='container'>
